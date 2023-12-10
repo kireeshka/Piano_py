@@ -4,7 +4,7 @@ import set
 
 
 class Plitki:
-    def __init__(self, size, name, x, y):
+    def __init__(self, size, name, x, y,numnote):
         self.size = size
         self.name = name
         self.getprsd = False
@@ -12,6 +12,7 @@ class Plitki:
         self.sound = pygame.mixer.Sound('Sounds/' + self.name + '.ogg')
         self.proigr = False
         self.timenaz = 0
+        self.numnote = numnote
 
         if self.size == 1:
             self.kart1 = pygame.image.load('short_tile.png')
@@ -28,6 +29,7 @@ class Plitki:
         self.wri.render_to(dp, [self.rect.x + 15, self.rect.y + 15], self.name)
 
     def update(self):
+        a = False
         if self.rect.y <= set.SIZE[1]:
             self.rect.y += 3
         r = pygame.mouse.get_pressed()
@@ -35,17 +37,19 @@ class Plitki:
             self.timenaz += 1
         else:
             self.timenaz = 0
-        if self.timenaz == 180:
+
+        if self.timenaz == 60:
             self.proigr = True
             self.timenaz = 0
+            self.image = self.kart2
 
     def nazat(self, dp):
         if self.getprsd == False:
-            self.image = self.kart2
             self.sound.play()
             self.getprsd = True
             if self.size == 1:
                 self.proigr = True
+                self.image = self.kart2
 
 
 
